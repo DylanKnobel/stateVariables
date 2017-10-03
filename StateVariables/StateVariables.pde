@@ -42,13 +42,17 @@ void draw() {
   background(255);
   moveSprite();
   if (animationState == 1) {
-    image(standingMarioR, x, y);
+    //image(standingMarioR, x, y);
     walkingAnimationMario();
   }
-  if (animationState == 2) {
+  else if (animationState == 2) {
     standingLuigiR = loadImage("Lr0.png");
-    walkingAnimationLuigi();}
+    walkingAnimationLuigi();
+  }
     animationChange();
+    if (mousePressed && (mouseButton == LEFT)){
+     animationState = 2; 
+    }
 }
 
 
@@ -81,8 +85,8 @@ void moveSprite() {
     if (x <= 0) {
       x = 0;
     }
-    if (x >= 900) {
-      x = 900;
+    if (x >= 915) {
+      x = 915;
     }
   }
 }
