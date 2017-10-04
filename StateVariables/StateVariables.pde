@@ -5,7 +5,7 @@ boolean movingLeft = false;
 boolean movingRight = false ;
 int counter = 0;
 PImage[] marioR = new PImage[5];
-PImage[] marioL = new PImage[3];
+PImage[] marioL = new PImage[5];
 PImage standingMarioR, standingMarioL;
 int marioWalkR, marioWalkL;
 int state = 3;
@@ -21,10 +21,10 @@ void setup() {
   marioWalkL = 0;
 
 
-standingMarioR = loadImage("r4.png");
-standingLuigiR = loadImage("Lr0.png");
+  standingMarioR = loadImage("r0.png");
+  standingLuigiR = loadImage("Lr0.png");
 
-//mario animation setup
+  //mario animation setup
   for (int iR=0; iR<marioR.length; iR++) {
     marioR[iR] =loadImage("r"+ iR + ".png");
   }
@@ -38,27 +38,24 @@ standingLuigiR = loadImage("Lr0.png");
   for (int iL=0; iL<luigiL.length; iL++) {
     luigiL[iL] =loadImage("Ll" + iL + ".png");
   }
-  
 }
 
 void draw() {
   // background(backdrop);
-  background(255);
+  //animationState = 2;
+  //state = 5;
+  background(255); //<>//
   moveSprite();
   if (animationState == 1) {
-    image(standingMarioR, x, y);
     walkingAnimationMario();
-  }
-  else if (animationState == 2) {
-    image(standingLuigiR, x, y, standingLuigiR.width*5,standingLuigiR.height*5);
+  } else if (animationState == 2) {
     walkingAnimationLuigi();
   }
-    animationChange();
-    if (mousePressed && (mouseButton == LEFT)){
-      animationState = 2; }
-     else if (mousePressed && (mouseButton == RIGHT)){
-        animationState = 1;}
-    
+  if (mousePressed && (mouseButton == LEFT)) {
+    animationState = 2;
+  } else if (mousePressed && (mouseButton == RIGHT)) {
+    animationState = 1;
+  } //<>//
 }
 
 
@@ -80,13 +77,11 @@ void moveSprite() {
   }
   if (movingRight) {
     x += 5;
-    state = 1;
   } else if (x == 0) {
     x = x + 0;
   }
   if (movingLeft) {
     x -= 5;
-    state = 2;
   } else {
     if (x <= 0) {
       x = 0;
@@ -102,10 +97,18 @@ void keyPressed() {
     jumping = true;
   } else if (key == 'a') {
     movingLeft = true;
-    state = 1;
+    if (animationState == 1) {
+      state = 2;
+    } else if (animationState == 2) {
+      state = 6;
+    }
   } else if (key == 'd') {
     movingRight = true;
-    state = 2;
+    if (animationState == 1) {
+      state = 1;
+    } else if (animationState == 2) {
+      state = 5;
+    }
   }
 }
 void keyReleased() {
@@ -113,10 +116,18 @@ void keyReleased() {
     jumping = false;
   } else if (key == 'a') {
     movingLeft = false;
-    state = 4;
+    if (animationState == 1) {
+      state = 4;
+    } else if (animationState == 2) {
+      state = 8;
+    }
   } else if (key == 'd') {
     movingRight = false ;
-    state = 3;
+    if (animationState == 1) {
+      state = 3;
+    } else if (animationState == 2) {
+      state = 7;
+    }
   }
 }
 
@@ -124,54 +135,43 @@ void keyReleased() {
 void walkingAnimationMario() {
   if (state == 1) {
     image(marioR[marioWalkR], x, y);
-    if (frameCount % 5 == 0) { 
+    if (frameCount % 4 == 0) { 
       marioWalkR++;
       marioWalkR = marioWalkR % marioR.length;
     }
   } else if (state == 2) {
     image(marioL[marioWalkL], x, y);
-    if (frameCount % 5 == 0) { 
+    if (frameCount % 4 == 0) { 
       marioWalkL++;
       marioWalkL = marioWalkL % marioL.length;
     }
   } else if (state == 3) {
     standingMarioR = loadImage("r0.png");
+    image(standingMarioR, x, y);
   } else if (state == 4) {
     standingMarioL = loadImage("l0.png");
+    image(standingMarioL, x, y);
   }
 }
 
 void walkingAnimationLuigi() {
   if (state == 5) {
-    image(luigiR[luigiWalkR], x, y);
-    if (frameCount % 5 == 0) { 
+    image(luigiR[luigiWalkR], x, y);//, luigiR.width*5, luigiR.height*5
+    if (frameCount % 4 == 0) { 
       luigiWalkR++;
       luigiWalkR = luigiWalkR % luigiR.length;
     }
   } else if (state == 6) {
-    image(luigiL[luigiWalkL], x, y);
-    if (frameCount % 5 == 0) { 
+    image(luigiL[luigiWalkL], x, y);//,luigiL.width*5, luigiL.height*5
+    if (frameCount % 4 == 0) { 
       luigiWalkL++;
       luigiWalkL = luigiWalkL % luigiL.length;
     }
   } else if (state == 7) {
     standingLuigiR = loadImage("Lr0.png");
+    image(standingLuigiR, x, y, standingLuigiR.width*5, standingLuigiR.height*5);
   } else if (state == 8) {
     standingLuigiL = loadImage("Ll0.png");
+    image(standingLuigiL, x, y, standingLuigiR.width*5, standingLuigiR.height*5);
   }
-}
-
-
-
-
-void animationChange(){
-  
-  
-  
-  
-  
-  
-  
-  
-  
 }
