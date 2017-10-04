@@ -4,7 +4,7 @@ boolean jumping = false;
 boolean movingLeft = false;
 boolean movingRight = false ;
 int counter = 0;
-PImage[] marioR = new PImage[3];
+PImage[] marioR = new PImage[5];
 PImage[] marioL = new PImage[3];
 PImage standingMarioR, standingMarioL;
 int marioWalkR, marioWalkL;
@@ -19,6 +19,10 @@ void setup() {
   size(1000, 600);
   marioWalkR = 0;
   marioWalkL = 0;
+
+
+standingMarioR = loadImage("r4.png");
+standingLuigiR = loadImage("Lr0.png");
 
 //mario animation setup
   for (int iR=0; iR<marioR.length; iR++) {
@@ -42,17 +46,19 @@ void draw() {
   background(255);
   moveSprite();
   if (animationState == 1) {
-    //image(standingMarioR, x, y);
+    image(standingMarioR, x, y);
     walkingAnimationMario();
   }
   else if (animationState == 2) {
-    standingLuigiR = loadImage("Lr0.png");
+    image(standingLuigiR, x, y, standingLuigiR.width*5,standingLuigiR.height*5);
     walkingAnimationLuigi();
   }
     animationChange();
     if (mousePressed && (mouseButton == LEFT)){
-     animationState = 2; 
-    }
+      animationState = 2; }
+     else if (mousePressed && (mouseButton == RIGHT)){
+        animationState = 1;}
+    
 }
 
 
@@ -129,9 +135,9 @@ void walkingAnimationMario() {
       marioWalkL = marioWalkL % marioL.length;
     }
   } else if (state == 3) {
-    standingMarioR = loadImage("r1.png");
+    standingMarioR = loadImage("r0.png");
   } else if (state == 4) {
-    standingMarioL = loadImage("l1.png");
+    standingMarioL = loadImage("l0.png");
   }
 }
 
