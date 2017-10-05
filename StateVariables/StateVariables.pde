@@ -156,13 +156,13 @@ void walkingAnimationMario() {
 
 void walkingAnimationLuigi() {
   if (state == 5) {
-    image(luigiR[luigiWalkR], x, y);//, luigiR.width*5, luigiR.height*5
+    image(luigiR[luigiWalkR], x, y, luigiR.width*5, luigiR.height*5);//, luigiR.width*5, luigiR.height*5
     if (frameCount % 4 == 0) { 
       luigiWalkR++;
       luigiWalkR = luigiWalkR % luigiR.length;
     }
   } else if (state == 6) {
-    image(luigiL[luigiWalkL], x, y);//,luigiL.width*5, luigiL.height*5
+    image(luigiL[luigiWalkL], x, y,luigiL.width*5, luigiL.height*5);//,luigiWalkL.width*5, luigiWalkL.height*5
     if (frameCount % 4 == 0) { 
       luigiWalkL++;
       luigiWalkL = luigiWalkL % luigiL.length;
