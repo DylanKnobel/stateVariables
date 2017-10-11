@@ -10,8 +10,8 @@ PImage standingMarioR, standingMarioL;
 int marioWalkR, marioWalkL;
 int state = 3;
 int animationState = 1;
-PImage[] luigiR = new PImage[5];
-PImage[] luigiL = new PImage[5];
+PImage[] luigiR = new PImage[3];
+PImage[] luigiL = new PImage[3];
 PImage standingLuigiR, standingLuigiL;
 int luigiWalkR, luigiWalkL;
 void setup() {
@@ -51,10 +51,12 @@ void draw() {
   } else if (animationState == 2) {
     walkingAnimationLuigi();
   }
-  if (mousePressed && (mouseButton == LEFT)) {
+  if (mousePressed && (mouseButton == RIGHT)) {
     animationState = 2;
-  } else if (mousePressed && (mouseButton == RIGHT)) {
+    state = 7;
+  } else if (mousePressed && (mouseButton == LEFT)) {
     animationState = 1;
+    state = 3;
   } //<>//
 }
 
@@ -156,13 +158,13 @@ void walkingAnimationMario() {
 
 void walkingAnimationLuigi() {
   if (state == 5) {
-    image(luigiR[luigiWalkR], x, y, luigiR.width*5, luigiR.height*5);//, luigiR.width*5, luigiR.height*5
+    image(luigiR[luigiWalkR], x, y, luigiR[luigiWalkR].width*5, luigiR[luigiWalkR].height*5);
     if (frameCount % 4 == 0) { 
       luigiWalkR++;
       luigiWalkR = luigiWalkR % luigiR.length;
     }
   } else if (state == 6) {
-    image(luigiL[luigiWalkL], x, y,luigiL.width*5, luigiL.height*5);//,luigiWalkL.width*5, luigiWalkL.height*5
+    image(luigiL[luigiWalkL], x, y,luigiL[luigiWalkL].width*5, luigiL[luigiWalkL].height*5);
     if (frameCount % 4 == 0) { 
       luigiWalkL++;
       luigiWalkL = luigiWalkL % luigiL.length;
