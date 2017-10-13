@@ -1,3 +1,11 @@
+//Dylan Knobel
+//October 13, 2017
+//basic animation of Mario and Luigi standard move controls left with A and right with D space to jump
+//left click to change to Mario right click to change to Luigi
+//when a and d key are pushed together the animation bugs and doesnt know what to do after 
+//one of the keys are let go often pointing the wrong way and there is no animation
+//
+
 int x = 300;
 int y = 360;
 boolean jumping = false;
@@ -10,10 +18,12 @@ PImage standingMarioR, standingMarioL;
 int marioWalkR, marioWalkL;
 int state = 3;
 int animationState = 1;
-PImage[] luigiR = new PImage[3];
-PImage[] luigiL = new PImage[3];
+PImage[] luigiR = new PImage[4];
+PImage[] luigiL = new PImage[4];
 PImage standingLuigiR, standingLuigiL;
 int luigiWalkR, luigiWalkL;
+
+
 void setup() {
   //loads sprites, sets screen size, loads sounds, and sets up animation
   size(1000, 600);
@@ -41,9 +51,6 @@ void setup() {
 }
 
 void draw() {
-  // background(backdrop);
-  //animationState = 2;
-  //state = 5;
   background(255); //<>//
   moveSprite();
   if (animationState == 1) {
@@ -61,7 +68,7 @@ void draw() {
 }
 
 
-
+//moves the image left, right and jumps also puts out boundaries
 void moveSprite() {
   if (jumping == true) {
     if (y > 200) {
@@ -93,6 +100,7 @@ void moveSprite() {
     }
   }
 }
+//checks if you pushed the key
 void keyPressed() {
   //this function will be called automatically every time a key on the keyboard is pressed
   if (key == ' ') {
@@ -113,6 +121,7 @@ void keyPressed() {
     }
   }
 }
+//checks for release of the key
 void keyReleased() {
   if (key == ' ') {
     jumping = false;
@@ -133,7 +142,7 @@ void keyReleased() {
   }
 }
 
-
+//walking animation for mario
 void walkingAnimationMario() {
   if (state == 1) {
     image(marioR[marioWalkR], x, y);
@@ -156,16 +165,17 @@ void walkingAnimationMario() {
   }
 }
 
+//walking animation for luigi
 void walkingAnimationLuigi() {
   if (state == 5) {
     image(luigiR[luigiWalkR], x, y, luigiR[luigiWalkR].width*5, luigiR[luigiWalkR].height*5);
-    if (frameCount % 4 == 0) { 
+    if (frameCount % 5 == 0) { 
       luigiWalkR++;
       luigiWalkR = luigiWalkR % luigiR.length;
     }
   } else if (state == 6) {
     image(luigiL[luigiWalkL], x, y,luigiL[luigiWalkL].width*5, luigiL[luigiWalkL].height*5);
-    if (frameCount % 4 == 0) { 
+    if (frameCount % 5 == 0) { 
       luigiWalkL++;
       luigiWalkL = luigiWalkL % luigiL.length;
     }
